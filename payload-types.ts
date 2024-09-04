@@ -11,6 +11,7 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
+    posts: Post;
     users: User;
     pages: Page;
     media: Media;
@@ -43,6 +44,167 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: string;
+  title: string;
+  heroImage?: (string | null) | Media;
+  heroTitle: string;
+  slug: string;
+  tags?:
+    | {
+        title?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  name: string;
+  sections?:
+    | {
+        blocks?:
+          | (
+              | {
+                  text: string;
+                  tag?: ('H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6' | 'span') | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'heading';
+                }
+              | {
+                  text?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'paragraph';
+                }
+              | {
+                  type?: ('ordered' | 'unordered') | null;
+                  items: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  };
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'list';
+                }
+              | {
+                  image: string | Media;
+                  description?: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  } | null;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'image';
+                }
+              | {
+                  authorFullname?: string | null;
+                  quoteText: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
+                    [k: string]: unknown;
+                  };
+                  backgrondImage?: (string | null) | Media;
+                  authorImage?: (string | null) | Media;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'quote';
+                }
+            )[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  Seo: {
+    pageSeoTitle: string;
+    metaDescription: string;
+    metaKeywords?:
+      | {
+          title?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    metaOgType?: ('article' | 'website') | null;
+    metaOgLocale?: ('fa_IR' | 'en_US' | 'de_DE') | null;
+    metaOgTitle?: string | null;
+    metaOgDescription?: string | null;
+    metaOgImageUrl?: (string | null) | Media;
+    metaOgImageAlt?: (string | null) | Media;
+    metaTwitterTitle?: string | null;
+    metaTwitterDescription?: string | null;
+    metaTwitterCardType?: ('summary' | 'summary_large_image' | 'app' | 'player') | null;
+    metaTwitterImageUrl?: string | null;
+    metaTwitterImage?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  text?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -85,25 +247,6 @@ export interface Page {
   } | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  text?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
